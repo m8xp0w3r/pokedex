@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      {{title}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,8 +9,14 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">{{title}}</ion-title>
     </ion-toolbar>
   </ion-header>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let pokemon of pokemonInfos()" size-xs="12" size-sm="6" size-md="3">
+        <app-pokemon-card [pokemonInfo]="pokemon"></app-pokemon-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
