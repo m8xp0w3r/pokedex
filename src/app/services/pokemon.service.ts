@@ -18,8 +18,8 @@ export class PokemonService {
   }
 
   public fetchPokemonInfos(): void {
-    this.httpClient.get<PokemonInfoApiResult>("https://pokeapi.co/api/v2/pokemon?limit=-1")
-    //this.httpClient.get<PokemonInfoApiResult>("https://pokeapi.co/api/v2/pokemon?limit=100")
+    //this.httpClient.get<PokemonInfoApiResult>("https://pokeapi.co/api/v2/pokemon?limit=-1")
+    this.httpClient.get<PokemonInfoApiResult>("https://pokeapi.co/api/v2/pokemon?limit=100")
       .subscribe(result => this.pokemonInfos.set(result.results));
   }
 

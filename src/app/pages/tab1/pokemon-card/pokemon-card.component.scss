@@ -7,8 +7,21 @@ ion-badge {
 
 ion-item {
   border-radius: 20px;
+  --min-height: 0px !important;
+}
+
+ion-label {
+
 }
 
 .pokemon-type {
-  margin: 1rem;
+  border-radius: 20px;
+}
+
+.first-item {
+  margin-right: 2px;
+}
+
+.second-item {
+  margin-left: 2px;
 }
