@@ -6,7 +6,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ionic serve --browser='google chrome'",
-    "build": "ng build",
+    "run-live-ios": "ionic cap run ios -l --external",
+    "sync": "npx cap sync",
+    "build": "ng build && npx cap sync",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
@@ -24,6 +26,7 @@
     "@capacitor/app": "5.0.6",
     "@capacitor/core": "5.5.1",
     "@capacitor/haptics": "5.0.6",
+    "@capacitor/ios": "5.5.1",
     "@capacitor/keyboard": "5.0.6",
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",

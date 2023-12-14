@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'pokedex',
+  appId: 'de.m8xp0w3r.pokedex',
+  appName: 'Pokedex',
   webDir: 'www',
   server: {
     androidScheme: 'https'
