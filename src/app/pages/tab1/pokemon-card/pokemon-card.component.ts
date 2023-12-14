@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, inject, Input, OnInit, signal, WritableSignal } from '@angular/core';
 import { PokemonInfo } from "../../../models/pokemon-info.interface";
 import { Pokemon } from "../../../models/pokemon.interface";
 import { PokemonService } from "../../../services/pokemon.service";

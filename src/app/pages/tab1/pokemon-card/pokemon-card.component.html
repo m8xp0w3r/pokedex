@@ -1,18 +1,7 @@
 <ion-card *ngIf="pokemonSignal() as pokemon" class="ion-padding">
   <img class="pokemon-image" [alt]="pokemon.name" [src]="pokemon.sprites.other['official-artwork'].front_default"/>
-  <ion-card-header>
-    <ion-card-title>{{ pokemon.name | titlecase}}</ion-card-title>
-    <ion-card-subtitle>Nr. {{pokemon.id}}</ion-card-subtitle>
-  </ion-card-header>
+  <app-pokemon-card-header [pokemon]="pokemon"></app-pokemon-card-header>
   <ion-card-content class="ion-no-padding">
-    <ion-grid class="ion-no-padding">
-      <ion-row class="ion-no-padding">
-        <ion-col class="ion-no-padding" *ngFor="let pokemonType of pokemon.types; let i = index" size-xs="12" size-sm="6">
-          <ion-item class="pokemon-type" [color]="pokemonType.type.name" [ngClass]="i === 0 ? 'first-item' : 'second-item'">
-            <ion-label class="ion-no-margin">{{pokemonType.type.name | titlecase}}</ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <app-pokemon-card-content [pokemon]="pokemon"></app-pokemon-card-content>
   </ion-card-content>
 </ion-card>

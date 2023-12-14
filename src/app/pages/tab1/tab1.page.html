@@ -14,8 +14,8 @@
   </ion-header>
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let pokemon of pokemonInfos()" size-xs="12" size-md="6" size-lg="3">
-        <app-pokemon-card [pokemonInfo]="pokemon"></app-pokemon-card>
+      <ion-col *ngFor="let pokemonInfo of pokemonInfos()" size-xs="12" size-md="6" size-lg="3">
+        <app-pokemon-card [pokemonInfo]="pokemonInfo"></app-pokemon-card>
       </ion-col>
     </ion-row>
   </ion-grid>
