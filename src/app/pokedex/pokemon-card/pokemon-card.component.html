@@ -1,7 +1,7 @@
 <ion-card>
-  @if (pokemon(); as pok) {
-    <img class="pokemon-image" [alt]="pok.name"
-         [src]="pok.sprites.other['official-artwork'].front_default"/>
+  @if (pokemonImage(); as url) {
+    <img class="pokemon-image" [alt]="pokemonName()"
+         [src]="url"/>
   }
   <ion-card-header>
     <ion-card-title>{{ pokemonName() }}</ion-card-title>

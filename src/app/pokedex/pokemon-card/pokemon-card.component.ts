@@ -16,10 +16,10 @@ import {
   IonCardSubtitle,
   IonCardTitle,
 } from "@ionic/angular/standalone";
-import { Pokemon } from "../../shared/interfaces/pokemon.interface";
 import { PokemonDetailData } from "../../shared/interfaces/pokemon-detail-data.interface";
 import { PokemonNameI18n } from "../../shared/interfaces/pokemon-name-i18n.interface";
 import { PokemonGenusI18n } from "../../shared/interfaces/pokemon-genus-i18n.interface";
+import { Pokemon, PokemonClient } from "pokenode-ts";
 
 @Component({
   selector: "latschi-pokedex-pokemon-card",
@@ -35,16 +35,19 @@ import { PokemonGenusI18n } from "../../shared/interfaces/pokemon-genus-i18n.int
   ],
 })
 export class PokemonCardComponent {
+  private pokemonClient: PokemonClient = new PokemonClient();
+
   public pokemonInfo: InputSignal<PokemonInfo> = input.required<PokemonInfo>();
   private pokemonResource: Resource<Pokemon | undefined> = resource({
     // Define a reactive computation.
     // The params value recomputes whenever any read signals change.
-    params: () => ({ url: this.pokemonInfo().url }),
+    params: () => ({ name: this.pokemonInfo().name }),
     // Define an async loader that retrieves data.
     // The resource calls this function every time the `params` value changes.
-    loader: ({ params }) =>
-      fetch(params.url).then((res) => res.json() as Promise<Pokemon>),
+    loader: async ({ params }) =>
+      await this.pokemonClient.getPokemonByName(params.name),
   });
+
   private pokemonDetailDataResource: Resource<PokemonDetailData | undefined> =
     resource({
       // Define a reactive computation.
@@ -53,15 +56,24 @@ export class PokemonCardComponent {
       // Define an async loader that retrieves data.
       // The resource calls this function every time the `params` value changes.
       loader: async ({ params }) => {
-        if (!params.url) return Promise.resolve(undefined);
-        const res: Response = await fetch(params.url);
-        return res.json();
+        return Promise.resolve(undefined);
+        //const res: Response = await fetch(params.url);
+        //return res.json();
       },
     });
 
   protected pokemon: Signal<Pokemon | undefined> = computed(() =>
     this.pokemonResource.value(),
   );
+
+  protected pokemonImage: Signal<string | null> = computed(() => {
+    const pokemon: Pokemon | undefined = this.pokemon();
+    if (!pokemon) return "";
+    if (pokemon.sprites.other) {
+      return pokemon.sprites.other["official-artwork"].front_default;
+    }
+    return pokemon.sprites.front_default;
+  });
 
   protected pokemonName: Signal<string> = computed(() => {
     const pokemonDetailData: PokemonDetailData | undefined =
