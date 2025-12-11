@@ -1,8 +1,8 @@
 {
   "name": "pokedex",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "m8xp0w3r",
+  "homepage": "https://m8xp0w3r.de",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -61,5 +61,5 @@
     "prettier": "^3.7.4",
     "typescript": "~5.9.0"
   },
-  "description": "An Ionic project"
+  "description": "A simple Pokedex app built with Ionic and Angular"
 }
