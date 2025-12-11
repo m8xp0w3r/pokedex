@@ -29,7 +29,10 @@
     "@capacitor/status-bar": "^8.0.0",
     "@ionic/angular": "^8.7.12",
     "@ngrx/signals": "^21.0.0-beta.0",
+    "axios": "^1.13.2",
+    "axios-cache-interceptor": "^1.9.0",
     "ionicons": "^8.0.13",
+    "pokenode-ts": "^1.20.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

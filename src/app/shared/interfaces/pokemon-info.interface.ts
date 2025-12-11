@@ -1,8 +1,8 @@
+import { NamedAPIResource } from "pokenode-ts";
+
 export interface PokemonInfoResult {
   name: string;
   url: string;
 }
 
-export interface PokemonInfo extends PokemonInfoResult {
-  id: number;
-}
+export interface PokemonInfo extends NamedAPIResource {}

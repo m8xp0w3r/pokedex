@@ -48,7 +48,7 @@ export class PokedexPage {
     this.#pokemonStore.pokemonInfo;
 
   async onIonInfinite(event: InfiniteScrollCustomEvent) {
-    await this.#pokemonStore.fetchPokemonInfos(true);
+    await this.#pokemonStore.fetchPokemonInfos();
     await event.target.complete();
   }
 }
