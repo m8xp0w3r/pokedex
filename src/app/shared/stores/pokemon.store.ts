@@ -6,6 +6,6 @@ export const PokemonStore = signalStore(
   { providedIn: "root" },
   withState({
     pokemonInfoApiResult: undefined as PokemonInfoApiResult | undefined,
-    pokemonInfo: [] as PokemonInfo[]
-  })
-)
+    pokemonInfo: [] as PokemonInfo[],
+  }),
+);
