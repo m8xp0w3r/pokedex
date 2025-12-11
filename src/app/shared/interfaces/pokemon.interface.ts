@@ -1,7 +1,8 @@
 import { Sprites } from "./sprites.interface";
 import { PokemonType } from "./pokemon-type.interface";
-import { PokemonSpecies } from "@interfaces/pokemon-species.interface";
-import { PokemonStats } from "@interfaces/pokemon-stats.interface";
+import { PokemonSpecies } from "./pokemon-species.interface";
+import { PokemonStats } from "./pokemon-stats.interface";
+
 
 export interface Pokemon {
   id: number;

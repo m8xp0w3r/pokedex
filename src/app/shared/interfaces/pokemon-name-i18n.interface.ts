@@ -1,4 +1,4 @@
-import { PokemonLanguage } from "@interfaces/pokemon-language.interface";
+import { PokemonLanguage } from "./pokemon-language.interface";
 
 export interface PokemonNameI18n {
   name: string;

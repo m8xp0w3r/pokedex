@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>pokedex</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      @for (pokemonInfo of pokemonInfos(); track pokemonInfo.id) {
+        <ion-col size-xs="12" size-md="6" size-lg="3">
+        <latschi-pokedex-pokemon-card [pokemonInfo]="pokemonInfo"></latschi-pokedex-pokemon-card>
+        </ion-col>
+      }
+    </ion-row>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-grid>
+</ion-content>

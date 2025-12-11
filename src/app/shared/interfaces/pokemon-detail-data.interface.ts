@@ -1,5 +1,5 @@
-import { PokemonNameI18n } from "@interfaces/pokemon-name-i18n.interface";
-import { PokemonGenusI18n } from "@interfaces/pokemon-genus-i18n.interface";
+import { PokemonNameI18n } from "./pokemon-name-i18n.interface";
+import { PokemonGenusI18n } from "./pokemon-genus-i18n.interface";
 
 export interface PokemonDetailData {
   base_happiness: number;
