@@ -8,7 +8,6 @@ import {
   Resource,
   Signal,
 } from "@angular/core";
-import { PokemonInfo } from "../../shared/interfaces/pokemon-info.interface";
 import {
   IonCard,
   IonCardContent,
@@ -16,10 +15,14 @@ import {
   IonCardSubtitle,
   IonCardTitle,
 } from "@ionic/angular/standalone";
-import { PokemonDetailData } from "../../shared/interfaces/pokemon-detail-data.interface";
-import { PokemonNameI18n } from "../../shared/interfaces/pokemon-name-i18n.interface";
-import { PokemonGenusI18n } from "../../shared/interfaces/pokemon-genus-i18n.interface";
-import { Pokemon, PokemonClient } from "pokenode-ts";
+import {
+  Genus,
+  Name,
+  NamedAPIResource,
+  Pokemon,
+  PokemonClient,
+  PokemonSpecies,
+} from "pokenode-ts";
 
 @Component({
   selector: "latschi-pokedex-pokemon-card",
@@ -37,7 +40,8 @@ import { Pokemon, PokemonClient } from "pokenode-ts";
 export class PokemonCardComponent {
   private pokemonClient: PokemonClient = new PokemonClient();
 
-  public pokemonInfo: InputSignal<PokemonInfo> = input.required<PokemonInfo>();
+  public pokemonInfo: InputSignal<NamedAPIResource> =
+    input.required<NamedAPIResource>();
   private pokemonResource: Resource<Pokemon | undefined> = resource({
     // Define a reactive computation.
     // The params value recomputes whenever any read signals change.
@@ -48,17 +52,16 @@ export class PokemonCardComponent {
       await this.pokemonClient.getPokemonByName(params.name),
   });
 
-  private pokemonDetailDataResource: Resource<PokemonDetailData | undefined> =
+  private pokemonSpeciesResource: Resource<PokemonSpecies | undefined> =
     resource({
       // Define a reactive computation.
       // The params value recomputes whenever any read signals change.
-      params: () => ({ url: this.pokemonResource.value()?.species.url }),
+      params: () => ({ id: this.pokemonResource.value()?.id }),
       // Define an async loader that retrieves data.
       // The resource calls this function every time the `params` value changes.
       loader: async ({ params }) => {
-        return Promise.resolve(undefined);
-        //const res: Response = await fetch(params.url);
-        //return res.json();
+        if (!params.id) return;
+        return this.pokemonClient.getPokemonSpeciesById(params.id);
       },
     });
 
@@ -76,20 +79,19 @@ export class PokemonCardComponent {
   });
 
   protected pokemonName: Signal<string> = computed(() => {
-    const pokemonDetailData: PokemonDetailData | undefined =
-      this.pokemonDetailDataResource.value();
-    const germanPokemonName: PokemonNameI18n | undefined =
-      pokemonDetailData?.names.find(
-        (name) => name.language.name.toLowerCase() === "de",
-      );
+    const pokemonDetailData: PokemonSpecies | undefined =
+      this.pokemonSpeciesResource.value();
+    const germanPokemonName: Name | undefined = pokemonDetailData?.names.find(
+      (name) => name.language.name.toLowerCase() === "de",
+    );
     return germanPokemonName?.name || this.pokemonInfo().name;
   });
 
   protected pokemonGenus: Signal<string> = computed(() => {
-    const pokemonDetailData: PokemonDetailData | undefined =
-      this.pokemonDetailDataResource.value();
+    const pokemonDetailData: PokemonSpecies | undefined =
+      this.pokemonSpeciesResource.value();
 
-    const genus: PokemonGenusI18n | undefined = pokemonDetailData?.genera.find(
+    const genus: Genus | undefined = pokemonDetailData?.genera.find(
       (genus) => genus.language.name.toLowerCase() === "de",
     );
     return genus?.genus || "";

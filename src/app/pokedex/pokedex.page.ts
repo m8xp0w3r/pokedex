@@ -18,9 +18,9 @@ import {
   IonToolbar,
 } from "@ionic/angular/standalone";
 import { PokemonStore } from "../shared/stores/pokemon.store";
-import { PokemonInfo } from "../shared/interfaces/pokemon-info.interface";
 import { PokemonCardComponent } from "./pokemon-card/pokemon-card.component";
 import { InfiniteScrollCustomEvent } from "@ionic/angular";
+import { NamedAPIResource } from "pokenode-ts";
 
 @Component({
   selector: "latschi-pokedex-pokedex-page",
@@ -44,7 +44,7 @@ import { InfiniteScrollCustomEvent } from "@ionic/angular";
 })
 export class PokedexPage {
   #pokemonStore = inject(PokemonStore);
-  protected pokemonInfos: Signal<PokemonInfo[]> =
+  protected pokemonInfos: Signal<NamedAPIResource[]> =
     this.#pokemonStore.pokemonInfo;
 
   async onIonInfinite(event: InfiniteScrollCustomEvent) {

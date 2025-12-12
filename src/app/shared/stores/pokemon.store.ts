@@ -6,19 +6,19 @@ import {
   withProps,
   withState,
 } from "@ngrx/signals";
-import { PokemonInfo } from "../interfaces/pokemon-info.interface";
-import { inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { NamedAPIResourceList, PokemonClient } from "pokenode-ts";
+import {
+  NamedAPIResource,
+  NamedAPIResourceList,
+  PokemonClient,
+} from "pokenode-ts";
 
 export const PokemonStore = signalStore(
   { providedIn: "root" },
   withState({
     pokemonInfoApiResult: undefined as NamedAPIResourceList | undefined,
-    pokemonInfo: [] as PokemonInfo[],
+    pokemonInfo: [] as NamedAPIResource[],
   }),
   withProps(() => ({
-    _httpClient: inject(HttpClient),
     _pokemonClient: new PokemonClient(),
   })),
   withMethods((store) => ({
@@ -34,7 +34,7 @@ export const PokemonStore = signalStore(
       }
       const pokemonInfoApiResult: NamedAPIResourceList =
         await store._pokemonClient.listPokemons(offset, limit);
-      const pokemonInfo: PokemonInfo[] = [
+      const pokemonInfo: NamedAPIResource[] = [
         ...store.pokemonInfo(),
         ...pokemonInfoApiResult.results,
       ];
