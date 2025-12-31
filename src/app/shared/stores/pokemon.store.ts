@@ -11,6 +11,7 @@ import {
   NamedAPIResourceList,
   PokemonClient,
 } from "pokenode-ts";
+import { isDevMode } from "@angular/core";
 
 export const PokemonStore = signalStore(
   { providedIn: "root" },
@@ -26,7 +27,7 @@ export const PokemonStore = signalStore(
       const previousPokemonInfoApiResult: NamedAPIResourceList | undefined =
         store.pokemonInfoApiResult();
       let offset = 0;
-      const limit = 20;
+      const limit = isDevMode() ? 1 : 20;
       if (previousPokemonInfoApiResult && previousPokemonInfoApiResult.next) {
         const url: string = previousPokemonInfoApiResult.next;
         const params: URLSearchParams = new URL(url).searchParams;

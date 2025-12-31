@@ -21,8 +21,9 @@ import {
 import { PokemonStore } from "../shared/stores/pokemon.store";
 import { PokemonCardComponent } from "./pokemon-card/pokemon-card.component";
 import { InfiniteScrollCustomEvent } from "@ionic/angular";
-import { NamedAPIResource, Pokemon } from "pokenode-ts";
+import { NamedAPIResource } from "pokenode-ts";
 import { PokemonDetailComponent } from "./pokemon-detail/pokemon-detail.component";
+import { PokemonDetailData } from "./pokemon-detail-data";
 
 @Component({
   selector: "latschi-pokedex-pokedex-page",
@@ -55,11 +56,11 @@ export class PokedexPage {
     await event.target.complete();
   }
 
-  async openPokemonDetail(pokemon: Pokemon) {
-    console.log("NL: selected: ", pokemon.name);
+  async openPokemonDetail(pokemonDetailData: PokemonDetailData) {
+    console.log(pokemonDetailData.pokemon);
     const modal = await this.modalController.create({
       component: PokemonDetailComponent,
-      componentProps: { pokemon },
+      componentProps: { pokemonDetailData: pokemonDetailData },
     });
     return await modal.present();
   }

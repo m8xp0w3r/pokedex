@@ -18,7 +18,7 @@ void bootstrapApplication(AppComponent, {
   providers: [
     provideZonelessChangeDetection(),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular(),
+    provideIonicAngular({ useSetInputAPI: true }),
     provideRouter(routes, withPreloading(PreloadAllModules)),
   ],
 });

@@ -3,14 +3,37 @@
     <ion-buttons slot="start">
       <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
-    <ion-title>Welcome</ion-title>
+    <ion-title>{{ pokemonDetailData().name }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label>Pokem on</ion-label>
-  </ion-item>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>{{ pokemonDetailData().name }}</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Grösse: {{ pokemonHeight() }} m</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gewicht: {{ pokemonWeight() }} kg</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <ion-label><h1>Fähigkeiten</h1></ion-label>
+    </ion-list-header>
+    @for (ability of pokemonAbilities(); track ability.id) {
+      <ion-item>
+        <ion-label>
+          <h1>{{ ability.name }}</h1>
+          <p>{{ ability.effectName }}</p>
+        </ion-label>
+      </ion-item>
+    }
+
+
+  </ion-list>
 </ion-content>

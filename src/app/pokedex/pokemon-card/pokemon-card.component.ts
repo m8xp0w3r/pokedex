@@ -24,6 +24,7 @@ import {
   PokemonClient,
   PokemonSpecies,
 } from "pokenode-ts";
+import { PokemonDetailData } from "../pokemon-detail-data";
 
 @Component({
   selector: "latschi-pokedex-pokemon-card",
@@ -98,13 +99,13 @@ export class PokemonCardComponent {
     return genus?.genus || " - ";
   });
 
-  public pokemonSelected: OutputEmitterRef<Pokemon> = output<Pokemon>();
-
+  public pokemonSelected: OutputEmitterRef<PokemonDetailData> =
+    output<PokemonDetailData>();
 
   onPokemonSelected() {
     const pokemon: Pokemon | undefined = this.pokemon();
     if (pokemon) {
-      this.pokemonSelected.emit(pokemon);
+      this.pokemonSelected.emit({ pokemon, name: this.pokemonName() });
     }
   }
 }
