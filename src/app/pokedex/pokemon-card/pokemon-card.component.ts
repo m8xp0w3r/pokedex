@@ -4,13 +4,14 @@ import {
   computed,
   input,
   InputSignal,
+  output,
+  OutputEmitterRef,
   resource,
   Resource,
   Signal,
 } from "@angular/core";
 import {
   IonCard,
-  IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
@@ -29,13 +30,7 @@ import {
   templateUrl: "./pokemon-card.component.html",
   styleUrls: ["./pokemon-card.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    IonCard,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonCardContent,
-  ],
+  imports: [IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle],
 })
 export class PokemonCardComponent {
   private pokemonClient: PokemonClient = new PokemonClient();
@@ -87,6 +82,12 @@ export class PokemonCardComponent {
     return germanPokemonName?.name || this.pokemonInfo().name;
   });
 
+  protected order: Signal<number> = computed(() => {
+    const pokemonDetailData: PokemonSpecies | undefined =
+      this.pokemonSpeciesResource.value();
+    return pokemonDetailData?.order || 0;
+  });
+
   protected pokemonGenus: Signal<string> = computed(() => {
     const pokemonDetailData: PokemonSpecies | undefined =
       this.pokemonSpeciesResource.value();
@@ -94,6 +95,16 @@ export class PokemonCardComponent {
     const genus: Genus | undefined = pokemonDetailData?.genera.find(
       (genus) => genus.language.name.toLowerCase() === "de",
     );
-    return genus?.genus || "";
+    return genus?.genus || " - ";
   });
+
+  public pokemonSelected: OutputEmitterRef<Pokemon> = output<Pokemon>();
+
+
+  onPokemonSelected() {
+    const pokemon: Pokemon | undefined = this.pokemon();
+    if (pokemon) {
+      this.pokemonSelected.emit(pokemon);
+    }
+  }
 }

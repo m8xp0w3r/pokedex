@@ -9,7 +9,7 @@
     <ion-row>
       @for (pokemonInfo of pokemonInfos(); track pokemonInfo.name) {
         <ion-col size-xs="12" size-md="6" size-lg="3">
-        <latschi-pokedex-pokemon-card [pokemonInfo]="pokemonInfo"></latschi-pokedex-pokemon-card>
+        <latschi-pokedex-pokemon-card [pokemonInfo]="pokemonInfo" (pokemonSelected)="openPokemonDetail($event)"></latschi-pokedex-pokemon-card>
         </ion-col>
       }
     </ion-row>
