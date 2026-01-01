@@ -6,7 +6,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ionic build",
+    "open-android": "ionic cap open android",
+    "sync-android": "ionic cap sync android",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",

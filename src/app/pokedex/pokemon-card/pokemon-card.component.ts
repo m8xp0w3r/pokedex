@@ -11,10 +11,10 @@ import {
   Signal,
 } from "@angular/core";
 import {
-  IonCard,
+  IonCard, IonCardContent,
   IonCardHeader,
   IonCardSubtitle,
-  IonCardTitle,
+  IonCardTitle, IonCol, IonGrid, IonRow,
 } from "@ionic/angular/standalone";
 import {
   Genus,
@@ -31,7 +31,16 @@ import { PokemonDetailData } from "../pokemon-detail-data";
   templateUrl: "./pokemon-card.component.html",
   styleUrls: ["./pokemon-card.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle],
+  imports: [
+    IonCard,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonCardContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+  ],
 })
 export class PokemonCardComponent {
   private pokemonClient: PokemonClient = new PokemonClient();
@@ -86,7 +95,7 @@ export class PokemonCardComponent {
   protected order: Signal<number> = computed(() => {
     const pokemonDetailData: PokemonSpecies | undefined =
       this.pokemonSpeciesResource.value();
-    return pokemonDetailData?.order || 0;
+    return pokemonDetailData?.id || 0;
   });
 
   protected pokemonGenus: Signal<string> = computed(() => {
@@ -97,6 +106,18 @@ export class PokemonCardComponent {
       (genus) => genus.language.name.toLowerCase() === "de",
     );
     return genus?.genus || " - ";
+  });
+
+  protected pokemonHeight: Signal<number> = computed(() => {
+    const pokemon = this.pokemon();
+    if (!pokemon) return 0;
+    return pokemon.height / 10;
+  });
+
+  protected pokemonWeight: Signal<number> = computed(() => {
+    const pokemon = this.pokemon();
+    if (!pokemon) return 0;
+    return pokemon.weight / 10;
   });
 
   public pokemonSelected: OutputEmitterRef<PokemonDetailData> =
